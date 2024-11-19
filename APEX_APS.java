@@ -76,7 +76,7 @@ public class APEX_APS{
             LocalDate d = LocalDate.now();
             // Adds data to file
             try (FileOutputStream red = new  FileOutputStream("data.txt", true)) {
-                String data = String.format("Date: %s, Time: %s\n", d, t);
+                String data = String.format("Date: %s, Time: %s%n", d, t);
                 red.write(data.getBytes());
             } catch (IOException e) {
                 e.printStackTrace();
