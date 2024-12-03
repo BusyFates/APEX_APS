@@ -4,14 +4,20 @@ import java.time.LocalTime;
 import java.time.LocalDate;
 
 public class APEX_APS{
+    private static int tcincome;
+    private static int tchours;
+    private static int totaldatalogs;
+    private static int blackCount;
+    private static int chineseCount;
+    private static int asianCount;
+    private static int hispanicCount;
+    private static int indianCount;
+
     private static double hours;
     private static int dayswork;
     private static String name;
-    private static String lastname;
-    public static Scanner sc;
+    public static Scanner sc = new Scanner(System.in);
     
-
-   
     // This creates a variable that can exist/be used in any method, but we first declare them above.
     public APEX_APS(int d) {
         dayswork = d;      }
@@ -23,8 +29,29 @@ public class APEX_APS{
     // This method flushes the screen(aka clears everythings) so that past screens aren't overlapping.
     public static void flush() {
         System.out.print("\033[H\033[2J");
-        System.out.flush();    }
+        System.out.flush();
+        }
 
+    public static void race() {
+        System.out.printf("What is your race, enter the respective number: \n %s\n %s\n %\n %s\n %s\n", "1 = black", "2 = chinese", "3 = asian", "4 = hispanic", "5 = indian");
+        int ur = sc.nextInt();
+        switch(ur) {
+            case 1:
+                blackCount += ur;
+                break;
+            case 2:
+                chineseCount += ur;
+                break;
+            case 3:
+                asianCount += ur;
+                break;
+            case 4:
+                hispanicCount += ur;
+                break;
+            case 5:
+                indianCount += ur;
+        }
+    }
     /* The CheckInOut method is the first opton most users will navigate to from the homepage.
      * This simply logs the users name, time and date they checked into the system. */
     public static void CheckInOut(){
@@ -47,13 +74,14 @@ public class APEX_APS{
         end = Math.abs(end);
         AccHours(start, end, n);
     }
-        /* The AccHours method gives the total amount of hours the user has worked during their time in office. */
+    /* The AccHours method gives the total amount of hours the user has worked during their time in office. */
     public static void AccHours(double s, double e, String n){
         System.out.print("Number of days in office: ");
         int days = sc.nextInt();
         flush();
         double hrs = (s - e) * days;
         hours = s-e;
+        tchours += hours;
         System.out.printf("%s, you have worked a total of %d days which totals %f hours\n", n, days, hrs);
         dayswork = days;
         homepage();
@@ -61,8 +89,8 @@ public class APEX_APS{
     /* The PayCheck Method is used to calculate the earnings of the user by using the data they provided. */
     public static void PayCheck(double h){
         Scanner sc = new Scanner(System.in);
-        int dw= 0;
-        int wl= 0;
+        int dw = 0;
+        int wl = 0;
         System.out.print("full day = f, half-day = h\nDo you work full day or half-day: ");
         String hpd = sc.next();
         if (hpd.equals("h")) {
@@ -72,9 +100,6 @@ public class APEX_APS{
         }
         System.out.print("What is your hourly wage: ");
         int wage = sc.nextInt();
-
-        //goof juice
-    
         do {
             System.out.print("How many days per week do you work: ");
             dw = sc.nextInt();
@@ -111,6 +136,7 @@ public class APEX_APS{
              * At the end of the file "reader.readLine" will assign null to "line". line(null) is equal to null so loop stops */
             while ((line = reader.readLine()) != null) {
                 System.out.println(line);
+                totaldatalogs ++;
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -119,16 +145,26 @@ public class APEX_APS{
     }
 
     public static void metric(){
-
+        System.out.printf(" ====================\n  APEX APS CORP DATA \n ====================\n\n");
+        System.out.printf("TOTAL CUMULATIVE DATA LOGS: %d\n ============================\n", totaldatalogs);
+        System.out.printf("TOTAL CUMMULATIVE EMPLOYEE HOURS: %d\n ==================================\n", tchours);
+        System.out.printf("TOTAL GENERATED EMPLOYEE INCOME: %d\n ==================================\n", tcincome);
+        System.out.printf("TOTAL DIVERSITY PERCENT INDEX \n ============================ \n Black = %d \n Chinese = %d \n Asian = %d \n Hispanic = %d \n Indian = %d \n =============================\n", blackCount, chineseCount, asianCount, hispanicCount, indianCount);
+        System.out.print("Back to home? Y or N: ");
+        String decide = sc.next();
+        if (decide.equalsIgnoreCase("Y")) {
+            flush();
+            homepage();
+        } else flush();
+        
     }
 
     /* The homepage method starts a loop of infinite method calling so that once the user chooses an option,
      they will end up back to the Homepage to choose another option. */
     public static void homepage(){
-        Scanner scan = new Scanner(System.in);
         System.out.printf("\nEnter a number to choose where to nagivate\n 1 = CheckIn/Out \n 2 = PayCheck \n 3 = Attendence\n 4 = metric \n It is reccomended to check in first\n");
         System.out.print("Nagivate: ");
-        int choice = scan.nextInt();
+        int choice = sc.nextInt();
         switch(choice) {
             case 1:
                 flush(); 
@@ -154,9 +190,8 @@ public class APEX_APS{
     }
     /* The Welcomepage method is quite literally self-explainitory. It also calls the Homepage method.*/
     public static void welcomepage(){
-        Scanner scan = new Scanner(System.in);
         System.out.printf("     ====================\n     %s\n     ====================\n     ready to get started? Y or N: ", "Welcome to Apex APS");
-        String decide = scan.next();
+        String decide = sc.next();
         if (decide.equalsIgnoreCase("Y")) {
         flush();
         homepage();}
