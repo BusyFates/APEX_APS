@@ -34,51 +34,7 @@ public class APEX_APS{
         System.out.print("\033[H\033[2J");
         System.out.flush();
         }
-// tried something here, wasnt really working out.
- /*   public static void race() throws NumberFormatException, IOException {
-        int value = 0;
-        System.out.printf("What is your race, enter the respective number: \n %s\n %s\n %s\n", "1 = black", "2 = asian", "3 = white");
-        int ur = sc.nextInt();
-        switch(ur) {
-            case 1:
-                fis = new FileInputStream("black.txt");
-                fos = new FileOutputStream("black.txt", true);
-                reader = new BufferedReader(new InputStreamReader(fis));
-                value = Integer.parseInt(reader.readLine().trim());
-                value += 1;
-                blackCount += value;
-                fos.write((value));
-                break;
-            case 2:
-                fis = new FileInputStream("asian.txt");
-                fos = new FileOutputStream("asian.txt", true);
-                reader = new BufferedReader(new InputStreamReader(fis));
-                value = Integer.parseInt(reader.readLine().trim());
-                value += 1;
-                asianCount += value;
-                fos.write((value));
-                break;
-            case 3:
-                fis = new FileInputStream("white.txt");
-                fos = new FileOutputStream("white.txt", true);
-                reader = new BufferedReader(new InputStreamReader(fis));
-                value = Integer.parseInt(reader.readLine().trim());
-                value += 1;
-                whiteCount += value;
-                fos.write((value));
-                break;
-            default:
-                fis = new FileInputStream("other.txt");
-                fos = new FileOutputStream("other.txt", true);
-                reader = new BufferedReader(new InputStreamReader(fis));
-                value = Integer.parseInt(reader.readLine().trim());
-                value += 1;
-                conficount += value;
-                fos.write((value + "").getBytes());
-                break;
-        }
-    } 
-    *\
+
     /* The CheckInOut method is the first opton most users will navigate to from the homepage.
      * This simply logs the users name, time and date they checked into the system. */
     public static void CheckInOut(){
